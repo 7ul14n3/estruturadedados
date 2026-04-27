@@ -1,0 +1,82 @@
+
+public class Main {
+    public Main() {
+    }
+
+    public static void main(String[] args) {
+        Tree minhaArvore = new Tree();
+        minhaArvore.inserir(50);
+        minhaArvore.inserir(30);
+        minhaArvore.inserir(70);
+        minhaArvore.inserir(20);
+        minhaArvore.inserir(40);
+        minhaArvore.inserir(60);
+        minhaArvore.inserir(80);
+        System.out.println("Resultado do Percurso P�s-Ordem:");
+        minhaArvore.mostrarPosOrdem();
+    }
+}
+
+
+class Tree {
+    TreeNode raiz;
+
+    Tree() {
+    }
+
+    public void inserir(int valor) {
+        if (this.raiz == null) {
+            this.raiz = new TreeNode(valor);
+        } else {
+            this.raiz.inserir(valor);
+        }
+
+    }
+
+    public void mostrarPosOrdem() {
+        if (this.raiz != null) {
+            this.raiz.posOrdem();
+        }
+
+    }
+}
+
+
+class TreeNode {
+    int dado;
+    TreeNode filhoEsquerdo;
+    TreeNode filhoDireito;
+
+    public TreeNode(int valor) {
+        this.dado = valor;
+    }
+
+    public void inserir(int valor) {
+        if (valor < this.dado) {
+            if (this.filhoEsquerdo == null) {
+                this.filhoEsquerdo = new TreeNode(valor);
+            } else {
+                this.filhoEsquerdo.inserir(valor);
+            }
+        } else if (valor > this.dado) {
+            if (this.filhoDireito == null) {
+                this.filhoDireito = new TreeNode(valor);
+            } else {
+                this.filhoDireito.inserir(valor);
+            }
+        }
+
+    }
+
+    public void posOrdem() {
+        if (this.filhoEsquerdo != null) {
+            this.filhoEsquerdo.posOrdem();
+        }
+
+        if (this.filhoDireito != null) {
+            this.filhoDireito.posOrdem();
+        }
+
+        System.out.print(this.dado + " ");
+    }
+}
